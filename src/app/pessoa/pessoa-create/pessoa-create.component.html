@@ -1,0 +1,97 @@
+<div class="container-fluid">
+  <form [formGroup]="pessoaForm" autocomplete="off" novalidate (ngSubmit)="createPessoa(pessoaForm.value)">
+    <div class="form-horizontal well">
+
+      <div class="form-group">
+        <label for="name" class="control-label col-md-2">Nome: </label>
+        <div class="col-md-5">
+          <input type="text" formControlName="nome" id="nome" class="form-control" />
+        </div>
+        <div class="col-md-5">
+          <em *ngIf="validateControl('nome') && hasError('nome', 'required')">Nome é Obrigatorio</em>
+         
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="sexo" class="control-label col-md-2">Sexo: </label>
+        <div class="col-md-5">
+          <label class="md-check">
+            <input type="radio" value="M" name="sexo" formControlName="sexo" >     
+            Masculino
+          </label>
+          <label class="md-check">
+            <input type="radio" value="F" name="sexo" formControlName="sexo">     
+            Feminino
+          </label>
+        </div>
+           
+
+      </div>
+
+      <div class="form-group">
+        <label for="name" class="control-label col-md-2">CPF: </label>
+        <div class="col-md-5">
+          <input type="number" formControlName="cpf" id="cpf" class="form-control" maxlength=11 />
+        </div>
+        <div class="col-md-5">
+          <em *ngIf="validateControl('cpf') && hasError('cpf', 'required')">CPF é Obrigatorio</em>
+         
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dataNascimento" class="control-label col-md-2">Data de Nascimento: </label>
+        <div class="col-md-5">
+          <input type="text" formControlName="dataNascimento" id="dataNascimento" 
+                              class="form-control" appDatepicker 
+                (change)="executeDatePicker($event)" readonly/>
+        </div>
+        <div class="col-md-5">
+          <em *ngIf="validateControl('dataNascimento') && hasError('dataNascimento', 'required')">Data de Nascimento Obrigatória</em>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="control-label col-md-2">E-mail: </label>
+        <div class="col-md-5">
+          <input type="text" formControlName="email" id="email" class="form-control" />
+        </div>
+        <div class="col-md-5">
+        
+          <em *ngIf="validateControl('email') && hasError('email', 'maxlength')">E-mail máximo de 100 Caracteres</em>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="telefone" class="control-label col-md-2">Telefone: </label>
+        <div class="col-md-5">
+          <input type="text" formControlName="telefone" id="telefone" class="form-control" />
+        </div>
+        <div class="col-md-5">
+        
+          <em *ngIf="validateControl('telefone') && hasError('telefone', 'maxlength')">Telefone máximo de 20 Caracteres</em>
+        </div>
+      </div>
+
+      <br><br>
+
+      <div class="form-group">
+          <div class="col-md-offset-5 col-md-1">
+              <button type="submit" class="btn btn-info" [disabled]="!pessoaForm.valid">Save</button>
+          </div>
+          <div class="col-md-1">
+              <button type="button" class="btn btn-danger" (click)="redirectToPessoaList()">Cancel</button>
+          </div>
+      </div>
+      
+    </div>
+  </form>
+
+  <app-success-modal [modalHeaderText]="'Success message'" 
+  [modalBodyText]="'Action completed successfully'" [okButtonText]="'OK'" 
+  (redirectOnOK)="redirectToPessoaList()"></app-success-modal>
+
+  <app-error-modal [modalHeaderText]="'Error message'" 
+  [modalBodyText]="errorMessage" [okButtonText]="'OK'"></app-error-modal>
+
+</div>

@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-offset-10 col-md-2">
+    <a [routerLink]="['/pessoa/create']">Criar Pessoa</a>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Data de Nascimento</th>
+            <th>Detalhes</th>
+            <th>Alterar</th>
+            <th>Excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pessoa of pessoas">
+            <td>{{pessoa.nome}}</td>
+            <td>{{pessoa.cpf}}</td>
+            <td>{{pessoa.dataNascimento | date: 'dd/MM/yyyy'}}</td>
+            <td>
+              <button type="button" id="details" class="btn btn-default" (click)="getPessoaDetails(pessoa.id)">Details</button>
+            </td>
+            <td>
+              <button type="button" id="update" class="btn btn-success" (click)="redirectToUpdatePage(pessoa.id)">Update</button>
+            </td>
+            <td>
+              <button type="button" id="delete" class="btn btn-danger" (click)="redirectToDeletePage(pessoa.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
